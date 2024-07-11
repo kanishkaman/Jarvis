@@ -1,87 +1,85 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>J.A.R.V.I.S. - Your Personal A.I. Assistant</title>
-</head>
-<body>
-    <h1>J.A.R.V.I.S. - Your Personal A.I. Assistant</h1>
-    <p>J.A.R.V.I.S. (Just A Rather Very Intelligent System) is a personal assistant project that uses voice commands to perform various tasks. The assistant can open websites, tell the time, play songs on Spotify, fetch location information, take screenshots, and more.</p>
+# J.A.R.V.I.S. - Your Personal AI Assistant
 
-    <h2>Features</h2>
-    <ul>
-        <li><strong>Voice Interaction</strong>: Interact with JARVIS using voice commands.</li>
-        <li><strong>Web Browsing</strong>: Open popular websites like YouTube, Google, GitHub, etc.</li>
-        <li><strong>App Launching</strong>: Launch applications like Visual Studio Code and Spotify.</li>
-        <li><strong>Play Songs on Spotify</strong>: Play specific songs on Spotify using voice commands.</li>
-        <li><strong>Location Information</strong>: Fetch and announce the current location.</li>
-        <li><strong>Screenshot</strong>: Take a screenshot and save it with a user-specified name.</li>
-        <li><strong>Time</strong>: Announce the current time.</li>
-    </ul>
+JARVIS is an advanced AI assistant built with Python. It can recognize your voice commands to perform various tasks such as opening websites, launching applications, fetching your location, playing songs on Spotify, taking screenshots, and more.
 
-    <h2>Installation</h2>
-    <h3>Prerequisites</h3>
-    <ul>
-        <li>Python 3.7 or higher</li>
-        <li>Virtual Environment (optional but recommended)</li>
-    </ul>
+## Features
 
-    <h3>Dependencies</h3>
-    <p>Install the required libraries using pip:</p>
-    <pre><code>pip install speechrecognition pyttsx3 webbrowser geocoder pyautogui spotipy requests</code></pre>
+- **Voice Command Recognition**: Uses Google's Speech Recognition API to understand your commands.
+- **Text-to-Speech**: Responds back to you using `pyttsx3`.
+- **Web Browsing**: Opens specified websites.
+- **Application Launching**: Opens specified applications on your system.
+- **Spotify Integration**: Plays songs on Spotify.
+- **Geolocation**: Fetches your current location.
+- **Screenshot Capture**: Takes screenshots and saves them with specified names.
+- **Time Reporting**: Tells the current time.
 
-    <h3>Setting Up Spotify API</h3>
-    <ol>
-        <li>Go to the <a href="https://developer.spotify.com/dashboard/applications">Spotify Developer Dashboard</a> and create a new application.</li>
-        <li>Note the <code>Client ID</code> and <code>Client Secret</code>.</li>
-        <li>Set the Redirect URI to <code>http://localhost:8888/callback</code>.</li>
-    </ol>
+## Installation
 
-    <h3>Configuration</h3>
-    <p>Create a file named <code>config.py</code> in the root directory and add your Spotify API credentials:</p>
-    <pre><code>SPOTIPY_CLIENT_ID = 'your_spotify_client_id'
+1. Clone the repository:
+
+    ```sh
+    git clone https://github.com/yourusername/JARVIS.git
+    cd JARVIS
+    ```
+
+2. Create a virtual environment and activate it:
+
+    ```sh
+    python -m venv venv
+    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+    ```
+
+3. Install the required packages:
+
+    ```sh
+    pip install -r requirements.txt
+    ```
+
+### Setting Up Spotify API
+
+1. Go to the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard/applications) and create a new application.
+2. Note the `Client ID` and `Client Secret`.
+3. Set the Redirect URI to `http://localhost:8888/callback`.
+
+### Configuration
+
+Create a file named `config.py` in the root directory and add your Spotify API credentials:
+
+```python
+SPOTIPY_CLIENT_ID = 'your_spotify_client_id'
 SPOTIPY_CLIENT_SECRET = 'your_spotify_client_secret'
-SPOTIPY_REDIRECT_URI = 'http://localhost:8888/callback'</code></pre>
+SPOTIPY_REDIRECT_URI = 'http://localhost:8888/callback'
+```
 
-    <h2>Usage</h2>
-    <p>Run the <code>main.py</code> file to start JARVIS:</p>
-    <pre><code>python main.py</code></pre>
+## Usage
+Run the main.py file to start JARVIS:
 
-    <h3>Example Voice Commands</h3>
-    <ul>
-        <li><strong>Open Websites</strong>: "Open YouTube", "Open Google", "Open GitHub"</li>
-        <li><strong>Launch Applications</strong>: "Open Visual Studio Code", "Open Spotify"</li>
-        <li><strong>Play Songs on Spotify</strong>: "Play [song name] on Spotify"</li>
-        <li><strong>Fetch Location</strong>: "What is my location?", "Where am I?"</li>
-        <li><strong>Take Screenshot</strong>: "Take a screenshot"</li>
-        <li><strong>Tell Time</strong>: "What is the time?"</li>
-        <li><strong>Greeting</strong>: "Hello Jarvis"</li>
-    </ul>
+```sh
+python main.py
+```
+### Example Voice Commands
+- **Open Websites**: "Open YouTube", "Open Google", "Open GitHub"
+- **Launch Applications**: "Open Visual Studio Code", "Open Spotify"
+- **Play Songs on Spotify**: "Play [song name] on Spotify"
+- **Fetch Location**: "What is my location?", "Where am I?"
+- **Take Screenshot**: "Take a screenshot"
+- **Tell Time**: "What is the time?"
+- **Greeting**: "Hello Jarvis"
 
-    <h3>Notes</h3>
-    <ul>
-        <li>Ensure your microphone is connected and working.</li>
-        <li>For Spotify functionality, ensure you have an active device (e.g., the Spotify app open on your phone or computer).</li>
-    </ul>
+### Notes
+- Ensure your microphone is connected and working.
+- For Spotify functionality, ensure you have an active device (e.g., the Spotify app open on your phone or computer).
 
-    <h2>Troubleshooting</h2>
-    <ul>
-        <li>If you encounter issues with the Spotify API, ensure your device is active and connected.</li>
-        <li>If speech recognition fails, check your microphone settings and internet connection.</li>
-        <li>For geolocation errors, ensure you have a stable internet connection.</li>
-    </ul>
+## Troubleshooting
+- If you encounter issues with the Spotify API, ensure your device is active and connected.
+- If speech recognition fails, check your microphone settings and internet connection.
+- For geolocation errors, ensure you have a stable internet connection.
 
-    <h2>License</h2>
-    <p>This project is licensed under the MIT License. See the <a href="LICENSE">LICENSE</a> file for more details.</p>
+## Acknowledgements
 
-    <h2>Acknowledgements</h2>
-    <ul>
-        <li><a href="https://pypi.org/project/SpeechRecognition/">SpeechRecognition</a></li>
-        <li><a href="https://pypi.org/project/pyttsx3/">pyttsx3</a></li>
-        <li><a href="https://docs.python.org/3/library/webbrowser.html">Webbrowser</a></li>
-        <li><a href="https://pypi.org/project/geocoder/">Geocoder</a></li>
-        <li><a href="https://pypi.org/project/PyAutoGUI/">pyautogui</a></li>
-        <li><a href="https://spotipy.readthedocs.io/">Spotipy</a></li>
-    </ul>
-</body>
-</html>
-
+- SpeechRecognition
+- pyttsx3
+- Webbrowser
+- Geocoder
+- pyautogui
+- Spotipy
