@@ -1,6 +1,6 @@
 # J.A.R.V.I.S. - Your Personal AI Assistant
 
-JARVIS is an advanced AI assistant built with Python. It can recognize your voice commands to perform various tasks such as opening websites, launching applications, answering questions using Google's Gemini API, fetching your location, playing songs on Spotify, taking screenshots, and more.
+JARVIS is an advanced AI assistant built with Python. It can recognize your voice commands to perform various tasks such as opening websites, launching applications, answering questions using Google's Gemini API, fetching your location, playing songs on Spotify, taking screenshots, and much more!
 
 ## Features
 
@@ -13,6 +13,7 @@ JARVIS is an advanced AI assistant built with Python. It can recognize your voic
 - **Geolocation**: Fetches your current location.
 - **Screenshot Capture**: Takes screenshots and saves them with specified names.
 - **Time Reporting**: Tells the current time, and many more custom settings.
+- **Time Reporting**: Tells the current time.
 
 ## Installation
 
@@ -20,6 +21,8 @@ JARVIS is an advanced AI assistant built with Python. It can recognize your voic
 
     ```sh
     git clone https://github.com/kanishkaman/JARVIS.git
+    git clone https://github.com/yourusername/JARVIS.git
+
     cd JARVIS
     ```
 
@@ -85,7 +88,6 @@ python main.py
 - For Gemini API errors, ensure your API key is correctly set and the API is enabled.
 
 ## Acknowledgements
-
 - SpeechRecognition
 - pyttsx3
 - Webbrowser
