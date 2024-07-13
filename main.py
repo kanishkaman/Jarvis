@@ -8,6 +8,8 @@ import pyautogui
 import time
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
+import google.generativeai as genai
+from google.generativeai.types import BrokenResponseError
 
 
 # BASIC FUNCTIONS:
@@ -38,9 +40,10 @@ def takeCommand():
             say("I'm sorry, I'm unable to reach the speech recognition service right now.")
             return ""
 
- # Set up your Spotify API credentials
-SPOTIPY_CLIENT_ID = 'eeaef7a2f6124bc783a1219b7eead300'
-SPOTIPY_CLIENT_SECRET = '557ba87bc19f469da3e7fbe795b9c299'
+
+# Set up your Spotify API credentials
+SPOTIPY_CLIENT_ID = ''
+SPOTIPY_CLIENT_SECRET = ''
 SPOTIPY_REDIRECT_URI = 'http://localhost:8888/callback'
 
 # Authenticate with Spotify
@@ -62,12 +65,36 @@ def play_song(song_name):
     else:
         say("Sorry, I couldn't find that song on Spotify.")
 
+
+# Function to load GEMINI PRO model and get responses
+genai.configure(api_key="")   # Add your API key here.
+
+model = genai.GenerativeModel("gemini-pro")
+chat = model.start_chat(history=[])
+def get_gemini_response(query):
+    try:
+        response = chat.send_message(query, stream=True)
+        response_text = ""
+        for r in response:
+            for candidate in r._result.candidates:
+                for part in candidate.content.parts:
+                    response_text += part.text
+        response_text = response_text.replace('*', '')  # Removes the '*' in the responses generated.
+        return response_text
+    except BrokenResponseError as e:
+        print("BrokenResponseError:", e)
+        if chat.last:
+            print("Last response:", chat.last)
+            chat.rewind()
+        return "I'm sorry, I encountered an issue while processing your request. Please try again."
+
+
 # Location Information Function
 def get_location():
     say("Sure sir, fetching your location.")
     print("Locating...")
     try:
-        g = geocoder.ip('me', timeout=10)  # Increase the timeout value
+        g = geocoder.ip('me', timeout=10)
         if g.ok:
             return g.city, g.state
         else:
@@ -76,6 +103,7 @@ def get_location():
         print(f"Error occurred: {e}")
         say("Sorry, I couldn't determine your location.")
         return None, None, None
+
 
 # Taking Screenshots
 def take_screenshot():
@@ -110,7 +138,7 @@ if __name__ == '__main__':
                     webbrowser.open(website_dict[site])
                     break
 
-        # todo: MAKE A DICTIONARY OF APPS TOO.
+        # Make a dictionary of apps too, if needed.
         if "visual studio code" in query_lower:
             path = r"C:\Users\hp\OneDrive - Indian Institute of Science\Desktop\Visual Studio Code.lnk"
             if os.path.exists(path):
@@ -138,7 +166,7 @@ if __name__ == '__main__':
             say(f"Sir, the time is {strfTime}")
 
         # https://ipinfo.io/json for location info
-        elif "my location" in query_lower:
+        elif "my location" or "where am I" in query_lower:
             city, state = get_location()
             say(f"I am not sure sir, But I think we are in {city}, in {state} of India")
 
@@ -146,8 +174,16 @@ if __name__ == '__main__':
             take_screenshot()
             say("Screenshot taken sir. It has been stored in the main folder of your program.")
 
+        elif "hello jarvis" in query_lower:
+            say("Hello there. I am Jarvis, your personal A.I. Assistant. How may I help you today?")
+
         elif "power".lower() in query_lower:
             say("Sure Sir, Powering Off.")
             break
+
+        else:
+            answer = get_gemini_response(query)
+            print(answer)
+            say(answer)
 
         # say(query)
